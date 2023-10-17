@@ -1,0 +1,32 @@
+[INFO] [2023-09-20 14:00:39] AJA_control_1.11.c:166: Program started
+[INFO] [2023-09-20 14:00:39] AJA_control_1.11.c:169: Initializing variables
+[INFO] [2023-09-20 14:00:39] AJA_control_1.11.c:172: Variables Initialized
+[INFO] [2023-09-20 14:00:39] AJA_control_1.11.c:175: Setting up signal handler
+[INFO] [2023-09-20 14:00:39] AJA_control_1.11.c:179: Signal handler setup succesful
+[INFO] [2023-09-20 14:00:39] AJA_control_1.11.c:182: Setting terminal attributes
+[INFO] [2023-09-20 14:28:30] AJA_control_1.11.c:166: Program started
+[INFO] [2023-09-20 14:28:30] AJA_control_1.11.c:169: Initializing variables
+[INFO] [2023-09-20 14:28:30] AJA_control_1.11.c:172: Variables Initialized
+[INFO] [2023-09-20 14:28:30] AJA_control_1.11.c:175: Setting up signal handler
+[INFO] [2023-09-20 14:28:30] AJA_control_1.11.c:179: Signal handler setup succesful
+[INFO] [2023-09-20 14:28:30] AJA_control_1.11.c:182: Setting terminal attributes
+[INFO] [2023-09-20 14:30:40] AJA_control_2.0.c:171: Program started
+[INFO] [2023-09-20 14:30:40] AJA_control_2.0.c:174: Initializing variables
+[INFO] [2023-09-20 14:30:40] AJA_control_2.0.c:177: Variables Initialized
+[INFO] [2023-09-20 14:30:40] AJA_control_2.0.c:180: Setting up signal handler
+[INFO] [2023-09-20 14:30:40] AJA_control_2.0.c:184: Signal handler setup succesful
+[INFO] [2023-09-20 14:30:40] AJA_control_2.0.c:187: Setting terminal attributes
+[INFO] [2023-09-20 14:30:40] AJA_control_2.0.c:194: Terminal attributes set succesfully
+[INFO] [2023-09-20 14:30:40] AJA_control_2.0.c:197: Output Buffer Flushed
+[INFO] [2023-09-20 14:34:00] AJA_control_2.0.c:245: Test Recording Started
+[INFO] [2023-09-20 14:34:00] AJA_control_2.0.c:161: Recording Started
+[INFO] [2023-09-20 14:35:00] AJA_control_2.0.c:163: Recording in Progress
+[INFO] [2023-09-20 14:35:00] AJA_control_2.0.c:165: Recording Ended
+[INFO] [2023-09-20 16:24:36] AJA_control_2.0.c:171: Program started
+[INFO] [2023-09-20 16:24:36] AJA_control_2.0.c:174: Initializing variables
+[INFO] [2023-09-20 16:24:36] AJA_control_2.0.c:177: Variables Initialized
+[INFO] [2023-09-20 16:24:36] AJA_control_2.0.c:180: Setting up signal handler
+[INFO] [2023-09-20 16:24:36] AJA_control_2.0.c:184: Signal handler setup succesful
+[INFO] [2023-09-20 16:24:36] AJA_control_2.0.c:187: Setting terminal attributes
+[INFO] [2023-09-20 16:24:36] AJA_control_2.0.c:194: Terminal attributes set succesfully
+[INFO] [2023-09-20 16:24:36] AJA_control_2.0.c:197: Output Buffer Flushed
