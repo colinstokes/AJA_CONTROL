@@ -3,7 +3,7 @@
 
 #include "MediaManagement.h"
 #include "SocketHandler.h" 
-#include "Log.h"
+// #include "Log.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,7 +30,7 @@ int format_media(int channel)
                                           "Connection: keep-alive\r\n"
                                           "\r\n";
       
-      // Create a bugger to hold complete HTTP request
+      // Create a buffer to hold complete HTTP request
       char http_request[256];
 
       snprintf(http_request, sizeof(http_request), http_request_template, content, IP_ADDRESS);
@@ -60,7 +60,7 @@ int format_media(int channel)
    {
       // If socket connection failed, print an error message
       printf("Failed to establish socket connection for channel %d\n", channel);
-      log_message(LOG_CRITICAL, "Failed to establish socket during reformatting", __FILE__, __LINE__);
+      // log_message(LOG_CRITICAL, "Failed to establish socket during reformatting", __FILE__, __LINE__);
       return -1;
    }   
 }
