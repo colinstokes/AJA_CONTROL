@@ -50,7 +50,7 @@ int keep_running = 1;
 // };
 
 // Initialize the channel information array
-struct ChannelInfo channelInfo[4]; 
+// struct ChannelInfo channelInfo[4]; 
 
 // Function to handle the interrupt signal (Ctrl+C in Terminal)
 void handle_interrupt(int signal)
