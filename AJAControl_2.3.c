@@ -9,7 +9,8 @@
 #include <errno.h>
 #include "SocketHandler.h" // custom socket handling 
 #include "TerminalUtility.h" // custom terminal utilities header
-#include "MediaManagement.h"
+#include "MediaManagement.h" // Custom MediaManagement header
+#include "FileManagement.h" // Custom FileManagement header
 
 // Look for errors
 // Dropped frames
@@ -22,8 +23,8 @@
 Version Notes
 *****************
 
-28 September 2023
-1. Got rid of logging to try to fix error where program aborts with log error code
+24 October 2023
+Updated MediaManagement message to send eParamID_StorageCommand values 5-9 (or 10 for all media)
 */
 
 // Code to rename recorded files: MM-DD-YYYY Hall_name
@@ -168,6 +169,16 @@ void stop_recording() // New function to stop recording
    }
 }
 
+void name_handler() // Handler for FileManagement function calls
+{
+   // Iterate through channels for clip renaming
+
+   for (int i = 1; i < 5; ++i)
+   {
+      rename_clip(i);
+      sleep(.1);
+   }
+}
 
 void record_handler(int duration_seconds) // Record handler to reduce repetition of code blocks
 {
@@ -271,19 +282,8 @@ int main()
       if (localTime->tm_wday == 3 && localTime->tm_hour == 0 && localTime->tm_min == 0)
       {
          // Reformat channel 1 and then sleep 30 seconds
-         format_media(1);
+         format_media();
          sleep(30);
-         // Reformat channel 2 and then sleep 30 seconds
-         format_media(2);
-         sleep(30);
-         // Reformat channel 3 and sleep 30 seconds
-         format_media(3);
-         sleep(30);
-         // Reformat channel 4 and exit
-         format_media(4);
-
-         // Add function in MediaMangement to reset media to "Keep Media" or maybe it reverts automatically
-
       }
         
       if (isWeekday) 
@@ -292,6 +292,7 @@ int main()
          // TEST VERSION
          // if (hour == 14 && minute == 54)
          // {
+         //    name_handler();
          //    log_message(LOG_INFO, "Test Recording Started", __FILE__, __LINE__);
          //    record_handler(ONE_MINUTE); 
          // }
@@ -300,6 +301,7 @@ int main()
          // 5:00PM - 6:00PM
          if (hour == 16 && minute == 59) 
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekday 5PM-6PM Recording Started", __FILE__, __LINE__);
             // Start recording at 17:00 and record for 60 minutes
             record_handler(SIXTY_MINUTES); // Duration in seconds of record time
@@ -307,6 +309,7 @@ int main()
          // 6:30PM - 7:30PM
          else if (hour == 18 && minute == 29)
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekday 6:30PM-7:30PM Recording Started", __FILE__, __LINE__);
             // Start recording at 18:30 and record for 60 minutes
             record_handler(SIXTY_MINUTES); // Duration in seconds of record time
@@ -314,6 +317,7 @@ int main()
          // 8:00PM - 9:30PM
          else if (hour == 19 && minute == 59)
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekday 8PM-9:30PM Recording Started", __FILE__, __LINE__);
             // Start recording 20:00 and record for 90 minutes
             record_handler(NINETY_MINUTES); // Duration in seconds of record time
@@ -330,6 +334,7 @@ int main()
          // 12:30PM - 1:30PM
          if (hour == 12 && minute == 29)
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekend 12:30PM-1:30PM Recording Started", __FILE__, __LINE__);
             // Start recording at 12:30 and record for 60 minutes
             record_handler(SIXTY_MINUTES); // Duration in seconds of record time
@@ -337,6 +342,7 @@ int main()
          // 2:00PM - 3:00PM
          else if (hour == 13 && minute == 59)
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekend 2:00PM-3:00PM Recording Started", __FILE__, __LINE__);
             // Start recording at 14:00 and record for 60 minutes
             record_handler(SIXTY_MINUTES); // Duration in seconds of record time
@@ -344,6 +350,7 @@ int main()
          // 3:30PM - 4:30PM 
          else if (hour == 15 && minute == 29)
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekend 3:30PM-4:30PM Recording Started", __FILE__, __LINE__);
             // Start recording at 15:30 and record for 60 minutes
             record_handler(SIXTY_MINUTES); // Duration in seconds of record time
@@ -351,6 +358,7 @@ int main()
          // 5:00PM - 6:00PM           
          if (hour == 16 && minute == 59) 
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekend 5:00PM-6:00PM Recording Started", __FILE__, __LINE__);
             // Start recording at 17:00 and record for 60 minutes
             record_handler(SIXTY_MINUTES); // Duration in seconds of record time
@@ -358,6 +366,7 @@ int main()
          // 6:30PM - 7:30PM
          else if (hour == 18 && minute == 29)
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekend 6:30PM-7:30PM Recording Started", __FILE__, __LINE__);
             // Start recording at 18:30 and record for 60 minutes
             record_handler(SIXTY_MINUTES); // Duration in seconds of record time
@@ -365,6 +374,7 @@ int main()
          // 8:00PM - 9:30PM
          else if (hour == 19 && minute == 59)
          {
+            name_handler();
             //log_message(LOG_INFO, "Weekend 8:00PM-9:30PM Recording Started", __FILE__, __LINE__);
             // Start recording 20:00 and record for 90 minutes
             record_handler(NINETY_MINUTES); // Duration in seconds of record time
