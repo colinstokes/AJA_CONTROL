@@ -27,7 +27,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
 {
 
 
-   printf("Attempting to rename clip %d", hall_name_str[hall_name]);
+   printf("Attempting to rename clip %s", hall_name_str[hall_name]);
 
    // Get the current date and time
    time_t rawtime;

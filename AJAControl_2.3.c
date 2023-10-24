@@ -176,7 +176,7 @@ void name_handler() // Handler for FileManagement function calls
    for (int i = 1; i < 5; ++i)
    {
       rename_clip(i);
-      sleep(.1);
+      //sleep(1);
    }
 }
 
