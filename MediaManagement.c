@@ -14,7 +14,7 @@
 
 int format_media()
 {
-   printf("Attempting to erase USB media");
+   printf("Attempting to erase USB media slots 1-4\n");
 
    // Create socket connection using SocketHandler.c
    int socket_fd = setup_socket(IP_ADDRESS, PORT);
@@ -38,7 +38,7 @@ int format_media()
       if (send_message(socket_fd, http_request) != -1)
       {
          // If succesful, send success message
-         printf("USB media erasure started\n");
+         printf("USB media slots 1-4 erasure started\n");
 
          // Close socket connection and exit the function upon success
          close_socket(socket_fd);

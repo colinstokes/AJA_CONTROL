@@ -1,7 +1,6 @@
 Needs to be built
 - AJAListener
-- FileNamer
-- MemoryManagement
+
 
 Figure out why log file is not being cycled.
 
@@ -78,7 +77,7 @@ FileNamer
 	Default: "Clip"
 
 MemoryManagement
-- Reformat media every Tuesday at midnight.
+- Reformat media every Wednesday at 4:30PM.
 
 	Paramid: eParamID_FormatMedia_USB_1
 	etc.

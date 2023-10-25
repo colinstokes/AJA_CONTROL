@@ -279,9 +279,9 @@ int main()
       int minute = localTime->tm_min;  // Get the current minute (0-59)
 
       // Check for reformatting conditions
-      if (localTime->tm_wday == 3 && localTime->tm_hour == 0 && localTime->tm_min == 0)
+      if (localTime->tm_wday == 2 && localTime->tm_hour == 16 && localTime->tm_min == 30)
       {
-         // Reformat channel 1 and then sleep 30 seconds
+         // Reformat all channels and then sleep 30 seconds
          format_media();
          sleep(30);
       }
