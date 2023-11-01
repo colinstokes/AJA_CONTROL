@@ -3,6 +3,7 @@
 
 #include "MediaManagement.h"
 #include "SocketHandler.h" 
+#include "DateTimeUtility.h"
 // #include "Log.h"
 
 #include <stdio.h>
@@ -14,7 +15,7 @@
 
 int format_media()
 {
-   printf("Attempting to erase USB media slots 1-4\n");
+   print_timestamp("Attempting to erase USB media slots 1-4 [MediaManagement]\n");
 
    // Create socket connection using SocketHandler.c
    int socket_fd = setup_socket(IP_ADDRESS, PORT);
@@ -38,7 +39,7 @@ int format_media()
       if (send_message(socket_fd, http_request) != -1)
       {
          // If succesful, send success message
-         printf("USB media slots 1-4 erasure started\n");
+         print_timestamp("USB media slots 1-4 erasure started [MediaManagement]\n");
 
          // Close socket connection and exit the function upon success
          close_socket(socket_fd);
@@ -47,7 +48,7 @@ int format_media()
       else
       {
          // If sending the message failed, print error message
-         printf("USB media erasure failed");
+         print_timestamp("USB media erasure failed [MediaManagement]\n");
 
          // Close socket connection and exit the function upon success
          close_socket(socket_fd);
@@ -59,7 +60,7 @@ int format_media()
    else
    {
       // If socket connection failed, print an error message
-      printf("Failed to establish socket connection\n");
+      print_timestamp("Failed to establish socket connection [MediaManagement]\n");
       // log_message(LOG_CRITICAL, "Failed to establish socket during reformatting", __FILE__, __LINE__);
       return -1;
    }   

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "DateTimeUtility.h"
 
 #define IP_ADDRESS "129.120.143.235"
 #define PORT 80 
@@ -27,7 +28,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
 {
 
 
-   printf("Attempting to rename clip %s\n", hall_name_str[hall_name]);
+   print_timestamp_hall("Attempting to rename clip %s [FileManagement]\n", hall_name_str[hall_name]);
 
    // Get the current date and time
    time_t rawtime;
@@ -62,7 +63,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
       if (send_message(socket_fd, http_request) != -1)
       {
          // If succesful, send success message
-         printf("File %d renamed\n", hall_name);
+         print_timestamp_hall("File %d renamed [FileManagement]\n", hall_name);
 
          // Close socket connection and exit the function upon success
          close_socket(socket_fd);
@@ -71,7 +72,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
       else
       {
          // If sending the message failed, print error message
-         printf("File %d rename failed\n", hall_name);
+         print_timestamp_hall("File %d rename failed [FileManagement]\n", hall_name);
 
          // Close socket connection and exit the function upon success
          close_socket(socket_fd);
@@ -83,7 +84,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
    else
    {
       // If socket connection failed, print an error message
-      printf("Failed to establish socket connection\n");
+      print_timestamp("Failed to establish socket connection [FileManagement]\n");
       // log_message(LOG_CRITICAL, "Failed to establish socket during reformatting", __FILE__, __LINE__);
       return -1;
    }   

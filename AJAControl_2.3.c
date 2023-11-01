@@ -11,6 +11,7 @@
 #include "TerminalUtility.h" // custom terminal utilities header
 #include "MediaManagement.h" // Custom MediaManagement header
 #include "FileManagement.h" // Custom FileManagement header
+#include "DateTimeUtility.h" // Custom timestamp function header
 
 // Look for errors
 // Dropped frames
@@ -23,14 +24,12 @@
 Version Notes
 *****************
 
-24 October 2023
-Updated MediaManagement message to send eParamID_StorageCommand values 5-9 (or 10 for all media)
-*/
+31 October, 2023
+Created DateTimeUtility to add timestamps to each printf message in the terminal
+to allow for easier debugging
 
-// Code to rename recorded files: MM-DD-YYYY Hall_name
-// This might be done directly on AJA, using a SET command, or it can
-// be done through system control.
-// Find out preferred drive for AJA
+Still working on AJAListener. the cJSON header is throwing an error
+*/
 
 // Global variables for IP address and port number
 const char *IP_ADDRESS = "129.120.143.235";
@@ -44,15 +43,6 @@ const int NINETY_MINUTES = 96 * 60; // With added safety interval
 // Define flag to control the loop
 int keep_running = 1;
 
-// // Structure to store last reformatting times for each channel
-// struct ChannelInfo 
-// {
-//    time_t lastReformatTime;
-// };
-
-// Initialize the channel information array
-// struct ChannelInfo channelInfo[4]; 
-
 // Function to handle the interrupt signal (Ctrl+C in Terminal)
 void handle_interrupt(int signal)
 {
@@ -61,7 +51,7 @@ void handle_interrupt(int signal)
 
 void start_recording() // Function to start recording
 {
-   printf("Attempting to start recording...\n"); // Debug message for start of function
+   print_timestamp("Attempting to start recording... [Main]\n"); // Debug message for start of function
 
    // Create socket connection using SocketHandler.c related file
    int socket_fd = setup_socket(IP_ADDRESS, PORT); // Change port if needed
@@ -85,7 +75,7 @@ void start_recording() // Function to start recording
       if (send_message(socket_fd, http_request) != -1)
       {
          // If the message was succesfully sent, print a success message
-         printf("Recording Started\n");
+         print_timestamp("Recording Started [Main]\n");
 
          // Close socket connection and exit the function upon success
          close_socket(socket_fd);
@@ -95,7 +85,7 @@ void start_recording() // Function to start recording
       else
       {
          // If sending the message failed, print an error message
-         printf("Failed to send start recording\n");
+         print_timestamp("Failed to send start recording [Main]\n");
 
          // Close socket and exit the function upon failure
          close_socket(socket_fd);
@@ -107,15 +97,14 @@ void start_recording() // Function to start recording
    else
    {
       // If socket connection failed, print error message
-      printf("Failed to establish socket connection\n");
-      // log_message(LOG_CRITICAL, "Failed to establish socket", __FILE__, __LINE__);
+      print_timestamp("Failed to establish socket connection [Main]\n");
       return; // Exit the function on socket connection failure
    }
 }
 
 void stop_recording() // New function to stop recording
 {
-   printf("Attempting to stop recording...\n");
+   print_timestamp("Attempting to stop recording... [Main]\n");
 
    // Create socket connection using SocketHandler.c related file
    int socket_fd = setup_socket(IP_ADDRESS, PORT);
@@ -137,13 +126,13 @@ void stop_recording() // New function to stop recording
       if (send_message(socket_fd, http_request) != -1)
       {
          // If the message was succesfully sent, print a success message
-         printf("Recording Paused\n");
+         print_timestamp("Recording Paused [Main]\n");
 
          // Send the stop recording message again to completely stop
          if (send_message(socket_fd, http_request) != -1)
          {
             // If the message was succesfully sent, print a success message
-            printf("Recording Stopped\n");
+            print_timestamp("Recording Stopped [Main]\n");
 
             // Close socket and exit the function on success
             close_socket(socket_fd);
@@ -152,7 +141,7 @@ void stop_recording() // New function to stop recording
          else
          {
             // If sending the message failed, print an error message
-            printf("Failed to send stop recording message\n");
+            print_timestamp("Failed to send stop recording message [Main]\n");
 
             // Close socket and exit the function if message fails to send
             close_socket(socket_fd);
@@ -162,8 +151,7 @@ void stop_recording() // New function to stop recording
       else
       {
          // If socket connection was not made succesfully, return an error
-         printf("Failed to establish socket\n");
-        // log_message(LOG_CRITICAL, "Failed to establish socket", __FILE__, __LINE__);
+         print_timestamp("Failed to establish socket [Main]\n");
          return; // Exit function
       }
    }
@@ -183,88 +171,30 @@ void name_handler() // Handler for FileManagement function calls
 void record_handler(int duration_seconds) // Record handler to reduce repetition of code blocks
 {
    start_recording();
-   //log_message(LOG_INFO, "Recording Started", __FILE__, __LINE__);
    sleep(duration_seconds);
-   //log_message(LOG_INFO, "Recording in Progress", __FILE__, __LINE__);
    stop_recording();
-   //log_message(LOG_INFO, "Recording Ended", __FILE__, __LINE__);
 }
-
-// // Function to check and trigger reformatting for a channel
-// void reformat_handler(int channel)
-// {
-//    time_t currentTime = time(NULL);
-//    struct tm* localTime = localtime(&currentTime);
-
-//    // Check the schedule for each channel
-//    if (channel == 0 && localTime->tm_hour == 0 && localTime->tm_min == 0)
-//    {
-//       // Trigger reformatting for channel 1 at 12:00AM
-//       if (format_media(1) == 0)
-//       {
-//          //Update the last reformatting time for channel 1
-//          channelInfo[0].lastReformatTime = currentTime;
-//       }
-//    }
-//    else if (channel == 1 && localTime->tm_hour == 0 && localTime->tm_min == 5)
-//    {
-//       // Trigger reformatting for channel 2 at 12:05AM
-//       if (format_media(2) == 0)
-//       {
-//          // Update the last reformatting time for channel 2
-//          channelInfo[1].lastReformatTime = currentTime;
-//       }
-//    }   
-//    else if (channel == 2 && localTime->tm_hour == 0 && localTime->tm_min == 10)
-//    {
-//       // Trigger reformatting for channel 2 at 12:05AM
-//       if (format_media(3) == 0)
-//       {
-//          // Update the last reformatting time for channel 2
-//          channelInfo[2].lastReformatTime = currentTime;
-//       }   
-//    }
-//    else if (channel == 3 && localTime->tm_hour == 0 && localTime->tm_min == 15)
-//    {
-//       // Trigger reformatting for channel 2 at 12:05AM
-//       if (format_media(4) == 0)
-//       {
-//          // Update the last reformatting time for channel 2
-//          channelInfo[3].lastReformatTime = currentTime;
-//       }   
-//    }
-// }
 
 int main() 
 {   
-
-   //log_message(LOG_INFO, "Program started", __FILE__, __LINE__);
-
-   printf("Initializing variables\n");
-   //log_message(LOG_INFO, "Initializing variables", __FILE__, __LINE__);
+   print_timestamp("Initializing variables [Main]\n");
    char key; // Declare the variable for keyboard input capture
-   printf("Variables Initialized\n");
-   //log_message(LOG_INFO, "Variables Initialized", __FILE__, __LINE__);
+   print_timestamp("Variables Initialized [Main]\n");
 
-   printf("Setting up signal handler\n");
-   //log_message(LOG_INFO, "Setting up signal handler", __FILE__, __LINE__);
+   print_timestamp("Setting up signal handler [Main]\n");
    // Set up the signal handler for graceful interrupt
    signal(SIGINT, handle_interrupt);
-   printf("Signal handler succesful\n");
-   //log_message(LOG_INFO, "Signal handler setup succesful", __FILE__, __LINE__);
+   print_timestamp("Signal handler succesful [Main]\n");
 
-   printf("Setting terminal attributes\n");
-   //log_message(LOG_INFO, "Setting terminal attributes", __FILE__, __LINE__);
+   print_timestamp("Setting terminal attributes [Main]\n");
    // Set terminal attributes for non-blocking input
    set_terminal_attributes();
 
    int flags = fcntl(STDIN_FILENO, F_GETFL, 0);
    fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK); // Set non-blocking mode for stdin
 
-   //log_message(LOG_INFO, "Terminal attributes set succesfully", __FILE__, __LINE__);
-   printf("Terminal attributes set succesfully\n");
+   print_timestamp("Terminal attributes set succesfully [Main]\n");
    fflush(stdout); // Flush the output buffer
-   //log_message(LOG_INFO, "Output Buffer Flushed", __FILE__, __LINE__);
 
    // Main loop
    while (keep_running) 
@@ -288,16 +218,6 @@ int main()
         
       if (isWeekday) 
       {
-
-         // TEST VERSION
-         // if (hour == 14 && minute == 54)
-         // {
-         //    name_handler();
-         //    log_message(LOG_INFO, "Test Recording Started", __FILE__, __LINE__);
-         //    record_handler(ONE_MINUTE); 
-         // }
-
-
          // 5:00PM - 6:00PM
          if (hour == 16 && minute == 59) 
          {
@@ -389,9 +309,6 @@ int main()
 
    // Restore terminal attributes when exiting program
    restore_terminal_attributes();
-
-   // Close log file
-   //close_log();
 
    return 0;
 }
