@@ -35,7 +35,7 @@ const char* monitored_parameters[] = {
    "eParamID_Channel_1_Recording_Failed_Alarm", // Recording Failed Alarms
    "eParamID_Channel_2_Recording_Failed_Alarm",
    "eParamID_Channel_3_Recording_Failed_Alarm",
-   "eParamID_Channel_4_Recording_Failed_Alarm",
+   "eParamID_Channel_4_Recording_Failed_Alarm"
 };
 
 // IMPORTANT: The event_listener() function MUST be run on a seperate thread, probably using 
