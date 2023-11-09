@@ -7,16 +7,14 @@
 #include <signal.h> // Signal heading for handling interrupts
 #include <fcntl.h> // Include fcntl for non-blocking input
 #include <errno.h>
+#include <pthread.h> // Multi-threading library
 #include "SocketHandler.h" // custom socket handling 
 #include "TerminalUtility.h" // custom terminal utilities header
 #include "MediaManagement.h" // Custom MediaManagement header
 #include "FileManagement.h" // Custom FileManagement header
 #include "DateTimeUtility.h" // Custom timestamp function header
-
-// Look for errors
-// Dropped frames
-// Record fail
-// Stop fail
+#include "Config.h" // Config header for IP and Port information
+#include "AJAListener.h" // Custom Listener header
 
 
 /*
@@ -24,11 +22,12 @@
 Version Notes
 *****************
 
-31 October, 2023
-Created DateTimeUtility to add timestamps to each printf message in the terminal
-to allow for easier debugging
+8 November, 2023
+cJSON error seems to be fixed. Copied cJSON.c and cJSON.h into source directory
+to be compiled along with the project.
 
-Still working on AJAListener. the cJSON header is throwing an error
+I still need to develop the multi-threading call in AJAControl_2.3 to manage 
+the AJAListener functions.
 */
 
 // Global variables for IP address and port number

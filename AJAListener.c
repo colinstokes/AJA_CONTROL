@@ -7,13 +7,19 @@
 #include <cjson/cJSON.h>
 #include <pthread.h>
 #include <errno.h>
+#include <sys/socket.h>
 #include "DateTimeUtility.h"
+#include "SocketHandler.h"
+#include "cJSON.h"
 
 // Global variables for IP address and port number
 const char *IP_ADDRESS = "129.120.143.235";
 const int PORT = 80;
 
 extern volatile int keep_running; // Declare keep_running from AJAControl.
+
+// Function prototype for analyze_json_data
+void analyze_json_data(const char* json_status_data);
 
 const char* monitored_parameters[] = {
    "eParamID_Media_Slot_1_Low_Alarm",           // Media Low Alarms
