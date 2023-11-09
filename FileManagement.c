@@ -9,11 +9,16 @@
 #include <string.h>
 #include <time.h>
 #include "DateTimeUtility.h"
+#include "Config.h"
 
-#define IP_ADDRESS "129.120.143.235"
-#define PORT 80 
+/* 
+Commented out with the addition of Config.h
+Any changes to IP and Port in AJAControl
+should populate to dependants.
+*/
 
-// enum HALLS {VOID, VH, RH, CHOIR, WPH}; // Void is placeholder to allow for natural number input
+// #define IP_ADDRESS "129.120.143.235"
+// #define PORT 80 
 
 const char* hall_name_str[] =
 {

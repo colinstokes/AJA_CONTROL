@@ -24,13 +24,22 @@ Version Notes
 
 8 November, 2023
 cJSON error seems to be fixed. Copied cJSON.c and cJSON.h into source directory
-to be compiled along with the project.
+to be compiled along with the project and this fixed the issue of the compiler
+not finding the functions.
 
 I still need to develop the multi-threading call in AJAControl_2.3 to manage 
 the AJAListener functions.
+
+*****************
+End Notes
+*****************
 */
 
-// Global variables for IP address and port number
+
+// Global variables for IP address and port number. These global variables
+// are addressed in Config.h. Changes here will change the IP and Port variables
+// in all dependants
+
 const char *IP_ADDRESS = "129.120.143.235";
 const int PORT = 80;
 

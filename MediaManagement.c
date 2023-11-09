@@ -1,17 +1,22 @@
 // This dependent code contains functions for reformatting 
 // external storage media for the AJA Qi Pro Go
 
-#include "MediaManagement.h"
-#include "SocketHandler.h" 
-#include "DateTimeUtility.h"
-// #include "Log.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "MediaManagement.h"
+#include "SocketHandler.h" 
+#include "DateTimeUtility.h"
+#include "Config.h"
 
-#define IP_ADDRESS "129.120.143.235"
-#define PORT 80 
+
+/* 
+Commented out with the addition of Config.h
+Any changes to IP and Port in AJAControl
+should populate to dependants.
+*/
+// #define IP_ADDRESS "129.120.143.235"
+// #define PORT 80 
 
 int format_media()
 {
