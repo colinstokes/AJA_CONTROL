@@ -7,14 +7,14 @@
 #include <signal.h> // Signal heading for handling interrupts
 #include <fcntl.h> // Include fcntl for non-blocking input
 #include <errno.h>
-#include <pthread.h> // Multi-threading library
+// #include <pthread.h> // Multi-threading library
 #include "SocketHandler.h" // custom socket handling 
 #include "TerminalUtility.h" // custom terminal utilities header
 #include "MediaManagement.h" // Custom MediaManagement header
 #include "FileManagement.h" // Custom FileManagement header
 #include "DateTimeUtility.h" // Custom timestamp function header
 #include "Config.h" // Config header for IP and Port information
-#include "AJAListener.h" // Custom Listener header
+// #include "AJAListener.h" // Custom Listener header
 
 
 /*
@@ -226,6 +226,16 @@ int main()
         
       if (isWeekday) 
       {
+
+         // TEST CASE
+         if (hour == 15 && minute == 45) 
+         {
+            name_handler();
+            //log_message(LOG_INFO, "Weekday 5PM-6PM Recording Started", __FILE__, __LINE__);
+            // Start recording at 17:00 and record for 60 minutes
+            record_handler(ONE_MINUTE); // Duration in seconds of record time
+         } 
+
          // 5:00PM - 6:00PM
          if (hour == 16 && minute == 59) 
          {
