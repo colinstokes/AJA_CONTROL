@@ -1,5 +1,7 @@
 {
    "files.associations": {
-      "filemanagement.h": "c"
+      "filemanagement.h": "c",
+      "datetimeutility.h": "c",
+      "config.h": "c"
    }
 }
