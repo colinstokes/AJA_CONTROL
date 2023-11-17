@@ -32,7 +32,7 @@ const char* hall_name_str[] =
 int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=WPH
 {
 
-   printf("Before print_timestamp_hall call\n");
+   // printf("Before print_timestamp_hall call\n");
 
    if (hall_name_str[hall_name] != NULL)
    {
@@ -43,7 +43,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
       print_timestamp("hall_name_str[hall_name] returned void\n");
    }
 
-   printf("After print_timestamp_hall call\n");
+   // printf("After print_timestamp_hall call\n");
    
 
    // Get the current date and time
