@@ -228,7 +228,7 @@ int main()
       {
 
          // TEST CASE
-         if (hour == 14 && minute == 04) 
+         if (hour == 15 && minute == 48) 
          {
             name_handler();
             //log_message(LOG_INFO, "Weekday 5PM-6PM Recording Started", __FILE__, __LINE__);
