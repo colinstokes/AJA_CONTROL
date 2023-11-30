@@ -36,8 +36,8 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
 
    if (hall_name_str[hall_name] != NULL)
    {
-      print_timestamp(hall_name_str[hall_name]);
-      print_timestamp_hall("Attempting to rename clip %d [FileManagement]\n", hall_name_str[hall_name]);
+      // printf("%s", hall_name_str[hall_name]);
+      print_timestamp_hall("Attempting to rename clip %d (%s) [FileManagement]\n", hall_name, hall_name_str);
    } 
    else
    {
@@ -80,7 +80,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
       if (send_message(socket_fd, http_request) != -1)
       {
          // If succesful, send success message
-         print_timestamp_hall("File %d renamed [FileManagement]\n", hall_name);
+         print_timestamp_hall("Clip %d (%s) renamed [FileManagement]\n", hall_name, hall_name_str);
 
          // Close socket connection and exit the function upon success
          close_socket(socket_fd);
@@ -89,7 +89,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=W
       else
       {
          // If sending the message failed, print error message
-         print_timestamp_hall("File %d rename failed [FileManagement]\n", hall_name);
+         print_timestamp_hall("Clip %d (%s) rename failed [FileManagement]\n", hall_name, hall_name_str);
 
          // Close socket connection and exit the function upon success
          close_socket(socket_fd);

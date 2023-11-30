@@ -22,13 +22,16 @@
 Version Notes
 *****************
 
-8 November, 2023
-cJSON error seems to be fixed. Copied cJSON.c and cJSON.h into source directory
-to be compiled along with the project and this fixed the issue of the compiler
-not finding the functions.
+29 November, 2023
+Fixed FileManagement printf issue. All new features tested, except for the
+new date divider function. Test this and then this should be the new 
+working version.
 
-I still need to develop the multi-threading call in AJAControl_2.3 to manage 
-the AJAListener functions.
+- Fixed printf bug
+- Added title banner giving program name, author, version, etc.
+- Added Date Divider function that should make it easier to find things in the terminal
+  logs. This will be especially important when I get the Listener function working
+  with multi-threading.
 
 *****************
 End Notes
@@ -185,6 +188,10 @@ void record_handler(int duration_seconds) // Record handler to reduce repetition
 
 int main() 
 {   
+   // This function prints a banner with information about the AJA Controller
+   // including the version, author, and initialization date and time
+   print_init_message();
+
    print_timestamp("Initializing variables [Main]\n");
    char key; // Declare the variable for keyboard input capture
    print_timestamp("Variables Initialized [Main]\n");
@@ -210,6 +217,9 @@ int main()
       // Get the current time
       time_t currentTime = time(NULL);
       struct tm *localTime = localtime(&currentTime);
+
+      // Check if it's a new day at midnight, and print date divider to terminal
+      date_divider(localTime);
         
       // Check if it's a weekday (1 to 5 represent Monday to Friday)
       int isWeekday = localTime->tm_wday >= 1 && localTime->tm_wday <= 5;
@@ -228,7 +238,7 @@ int main()
       {
 
          // TEST CASE
-         if (hour == 15 && minute == 48) 
+         if (hour == 13 && minute == 35) 
          {
             name_handler();
             //log_message(LOG_INFO, "Weekday 5PM-6PM Recording Started", __FILE__, __LINE__);
