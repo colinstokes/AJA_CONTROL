@@ -84,7 +84,7 @@ void print_init_message()
    printf("\n");
 }
 
-void log_organizer(const struct tm *localTime)
+void date_divider(const struct tm *localTime)
 {
    // Check if it's midnight (00:00:00)
    if (localTime->tm_hour == 0 && localTime->tm_min == 0 && localTime->tm_sec == 0)
