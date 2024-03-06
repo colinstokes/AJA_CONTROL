@@ -1,0 +1,9 @@
+[INFO] [2023-09-19 13:12:27] AJA_control_1.11.c:166: Program started
+[INFO] [2023-09-19 13:46:41] AJA_control_1.11.c:166: Program started
+
+[INFO] [2023-09-19 14:37:51] AJA_control_1.11.c:166: Program started
+[INFO] [2023-09-19 14:37:51] AJA_control_1.11.c:169: Initializing variables
+[INFO] [2023-09-19 14:37:51] AJA_control_1.11.c:172: Variables Initialized
+[INFO] [2023-09-19 14:37:51] AJA_control_1.11.c:175: Setting up signal handler
+[INFO] [2023-09-19 14:37:51] AJA_control_1.11.c:179: Signal handler setup succesful
+[INFO] [2023-09-19 14:37:51] AJA_control_1.11.c:182: Setting terminal attributes

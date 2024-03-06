@@ -1,0 +1,86 @@
+Needs to be built
+- AJAListener
+
+
+Figure out why log file is not being cycled.
+
+http://129.120.143.235/descriptors
+
+AJAListener
+- I might need to send Get requests at periodic intervals, and then have different log 
+  messages depending on the response. State checks could be printed to logs, and also
+  generate an error if the state is different than expected, i.e. if transport state is 
+  stopped during an expected concert time
+
+Statuses to check
+- Transport state, i.e. recording, paused or stopped. 
+	- (Paramid: eParamID_TransportState)
+- Media State
+	- (Paramid: eParamID_Media_Slot_1_State) One for each channel
+- SMB state
+	- (Paramid: eParamID_Media_SMB_1_State)
+- SMB Low Alarm Paramid: eParamID_Media_SMB_1_Low_Alarm
+
+- SMB Full Alarm Paramid: eParamID_Media_SMB_1_Full_Alarm
+
+- SMB Mount Alarm: Paramid: eParamID_Media_SMB_1_Mount_Failed_Alarm
+
+- Paramid: eParamID_Media_SMB_1_Too_Slow_Alarm
+
+- USB Media Full Alarm: Paramid: eParamID_Media_Slot_1_Full_Alarm
+
+- USB Media Removed Alarm: Paramid: eParamID_Media_Slot_1_Removed_Alarm
+
+- Paramid: eParamID_Channel_1_Recording_Failed_Alarm
+
+FileNamer
+
+    Renaming convention:
+	Paramid: eParamID_Channel_1_Clipname
+	Type: String Value
+	Menu Number: 21.0
+	Name: Channel 1 Clip Name
+	Description: A user defined name used to generate the record filename for Channel 1.
+	Access: Read/Write
+	Persistence: true
+	Preset: true
+	Default: "Clip"
+
+	Paramid: eParamID_Channel_2_Clipname
+	Type: String Value
+	Menu Number: 23.0
+	Name: Channel 2 Clip Name
+	Description: A user defined name used to generate the record filename for Channel 2.
+	Access: Read/Write
+	Persistence: true
+	Preset: true
+	Default: "Clip"
+
+	Paramid: eParamID_Channel_3_Clipname
+	Type: String Value
+	Menu Number: 25.0
+	Name: Channel 3 Clip Name
+	Description: A user defined name used to generate the record filename for Channel 3.
+	Access: Read/Write
+	Persistence: true
+	Preset: true
+	Default: "Clip"
+
+	Paramid: eParamID_Channel_4_Clipname
+	Type: String Value
+	Menu Number: 27.0
+	Name: Channel 4 Clip Name
+	Description: A user defined name used to generate the record filename for Channel 4.
+	Access: Read/Write
+	Persistence: true
+	Preset: true
+	Default: "Clip"
+
+MemoryManagement
+- Reformat media every Wednesday at 4:30PM.
+
+	Paramid: eParamID_FormatMedia_USB_1
+	etc.
+
+	
+

@@ -1,0 +1,33 @@
+[INFO] [2023-09-21 14:47:51] AJA_control_2.0.c:171: Program started
+[INFO] [2023-09-21 14:47:51] AJA_control_2.0.c:174: Initializing variables
+[INFO] [2023-09-21 14:47:51] AJA_control_2.0.c:177: Variables Initialized
+[INFO] [2023-09-21 14:47:51] AJA_control_2.0.c:180: Setting up signal handler
+[INFO] [2023-09-21 14:47:51] AJA_control_2.0.c:184: Signal handler setup succesful
+[INFO] [2023-09-21 14:47:51] AJA_control_2.0.c:187: Setting terminal attributes
+[INFO] [2023-09-21 14:47:51] AJA_control_2.0.c:194: Terminal attributes set succesfully
+[INFO] [2023-09-21 14:47:51] AJA_control_2.0.c:197: Output Buffer Flushed
+[INFO] [2023-09-21 14:49:55] AJA_control_2.0.c:175: Program started
+[INFO] [2023-09-21 14:49:55] AJA_control_2.0.c:178: Initializing variables
+[INFO] [2023-09-21 14:49:55] AJA_control_2.0.c:181: Variables Initialized
+[INFO] [2023-09-21 14:49:55] AJA_control_2.0.c:184: Setting up signal handler
+[INFO] [2023-09-21 14:49:55] AJA_control_2.0.c:188: Signal handler setup succesful
+[INFO] [2023-09-21 14:49:55] AJA_control_2.0.c:191: Setting terminal attributes
+[INFO] [2023-09-21 14:49:55] AJA_control_2.0.c:198: Terminal attributes set succesfully
+[INFO] [2023-09-21 14:49:55] AJA_control_2.0.c:201: Output Buffer Flushed
+[INFO] [2023-09-21 14:50:00] AJA_control_2.0.c:249: Test Recording Started
+[CRITICAL] [2023-09-21 14:50:00] AJA_control_2.0.c:100: Failed to establish socket
+[INFO] [2023-09-21 14:50:00] AJA_control_2.0.c:165: Recording Started
+[INFO] [2023-09-21 14:50:49] AJA_control_2.0.c:167: Recording in Progress
+[INFO] [2023-09-21 14:50:49] AJA_control_2.0.c:169: Recording Ended
+[INFO] [2023-09-21 14:51:06] AJA_control_2.0.c:175: Program started
+[INFO] [2023-09-21 14:51:06] AJA_control_2.0.c:178: Initializing variables
+[INFO] [2023-09-21 14:51:06] AJA_control_2.0.c:181: Variables Initialized
+[INFO] [2023-09-21 14:51:06] AJA_control_2.0.c:184: Setting up signal handler
+[INFO] [2023-09-21 14:51:06] AJA_control_2.0.c:188: Signal handler setup succesful
+[INFO] [2023-09-21 14:51:06] AJA_control_2.0.c:191: Setting terminal attributes
+[INFO] [2023-09-21 14:51:06] AJA_control_2.0.c:198: Terminal attributes set succesfully
+[INFO] [2023-09-21 14:51:06] AJA_control_2.0.c:201: Output Buffer Flushed
+[INFO] [2023-09-21 14:54:00] AJA_control_2.0.c:249: Test Recording Started
+[INFO] [2023-09-21 14:54:00] AJA_control_2.0.c:165: Recording Started
+[INFO] [2023-09-21 14:54:43] AJA_control_2.0.c:167: Recording in Progress
+[INFO] [2023-09-21 14:54:43] AJA_control_2.0.c:169: Recording Ended
