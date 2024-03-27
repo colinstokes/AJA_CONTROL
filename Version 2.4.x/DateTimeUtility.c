@@ -86,24 +86,13 @@ void print_init_message()
 
 void date_divider(const struct tm *localTime)
 {
-   char buffer[70]; // Buffer to hold the formatted string including day of week
-   
    // Check if it's midnight (00:00:00)
    if (localTime->tm_hour == 0 && localTime->tm_min == 0 && localTime->tm_sec == 0)
    {
       // Print the date to make it easier to find information in the terminal logs
-      
-      /*
       printf("\n");
-      printf("**********************");
+      printf("**********************\n");
       printf("MONDAY, %02D/%02D/%04D\n", localTime->tm_mon + 1, localTime->tm_mday, localTime->tm_year + 1900);
       printf("**********************\n");
-      */
-
-     // New print function to fix the static Monday print.
-     strftime(buffer, sizeof(buffer), "**********************\n%A, %m/%d/%Y\n**********************", localTime);
-
-     // Print the formatted string
-     printf("\n%s\n", buffer);
    }
 }

@@ -25,24 +25,24 @@ const char* hall_name_str[] =
    "VOID", // 0
    "VH",   // 1
    "RH",   // 2
-   "MEIT",// 3
-   "LW"   // 4
+   "CHOIR",// 3
+   "WPH"   // 4
 };
 
-int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=MEIT, 4=LW
+int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=CHOIR, 4=WPH
 {
 
    // printf("Before print_timestamp_hall call\n");
 
-   if (hall_name_str[hall_name] != NULL)
-   {
-      // printf("%s", hall_name_str[hall_name]);
-      print_timestamp_hall("Attempting to rename clip %d (%s) [FileManagement]\n", hall_name, hall_name_str);
-   } 
-   else
-   {
-      print_timestamp("hall_name_str[hall_name] returned void\n");
-   }
+   // if (hall_name_str[hall_name] != NULL)
+   // {
+   //    // printf("%s", hall_name_str[hall_name]);
+   //    // print_timestamp_hall("Attempting to rename clip %d (%s) [FileManagement]\n", hall_name, hall_name_str);
+   // } 
+   // else
+   // {
+   //    print_timestamp("hall_name_str[hall_name] returned void\n");
+   // }
 
    // printf("After print_timestamp_hall call\n");
    

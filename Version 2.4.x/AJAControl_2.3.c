@@ -1,3 +1,12 @@
+
+#include "AJAListener.h" // Custom Listener header
+#include "SocketHandler.h" // custom socket handling 
+#include "TerminalUtility.h" // custom terminal utilities header
+#include "MediaManagement.h" // Custom MediaManagement header
+#include "FileManagement.h" // Custom FileManagement header
+#include "DateTimeUtility.h" // Custom timestamp function header
+#include "Config.h" // Config header for IP and Port information
+#include "Globals.h" // Holds global keep_running variable
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,14 +16,9 @@
 #include <signal.h> // Signal heading for handling interrupts
 #include <fcntl.h> // Include fcntl for non-blocking input
 #include <errno.h>
-// #include <pthread.h> // Multi-threading library
-#include "SocketHandler.h" // custom socket handling 
-#include "TerminalUtility.h" // custom terminal utilities header
-#include "MediaManagement.h" // Custom MediaManagement header
-#include "FileManagement.h" // Custom FileManagement header
-#include "DateTimeUtility.h" // Custom timestamp function header
-#include "Config.h" // Config header for IP and Port information
-// #include "AJAListener.h" // Custom Listener header
+#include <pthread.h> // Multi-threading library
+
+
 
 
 /*
@@ -22,16 +26,14 @@
 Version Notes
 *****************
 
-29 November, 2023
-Fixed FileManagement printf issue. All new features tested, except for the
-new date divider function. Test this and then this should be the new 
-working version.
+30 November, 2023
+Fixed small bug in DateTimeUtility regarding function name discrepencies. 
 
-- Fixed printf bug
-- Added title banner giving program name, author, version, etc.
-- Added Date Divider function that should make it easier to find things in the terminal
-  logs. This will be especially important when I get the Listener function working
-  with multi-threading.
+Added multithread implementation of the AJAListener functions.
+
+TO-DO: 
+- Consider moving the recording related functions in this file to a seperate file
+   perhaps called TransportControl.c to condense the length of this main file.
 
 *****************
 End Notes
@@ -51,8 +53,13 @@ const int ONE_MINUTE = 60; // TEST CASE
 const int SIXTY_MINUTES = 66 * 60; // With added safety interval
 const int NINETY_MINUTES = 96 * 60; // With added safety interval
 
-// Define flag to control the loop
-int keep_running = 1;
+volatile int keep_running = 1; // Declare and initialize keep_running
+
+// // Define flag to control the loop
+// int keep_running = 1;
+
+// Declare the listener_thread
+pthread_t listener_thread;
 
 // Function to handle the interrupt signal (Ctrl+C in Terminal)
 void handle_interrupt(int signal)
@@ -62,7 +69,7 @@ void handle_interrupt(int signal)
 
 void start_recording() // Function to start recording
 {
-   print_timestamp("Attempting to start recording... [Main]\n"); // Debug message for start of function
+   // print_timestamp("Attempting to start recording... [Main]\n"); // Debug message for start of function
 
    // Create socket connection using SocketHandler.c related file
    int socket_fd = setup_socket(IP_ADDRESS, PORT); // Change port if needed
@@ -115,7 +122,7 @@ void start_recording() // Function to start recording
 
 void stop_recording() // New function to stop recording
 {
-   print_timestamp("Attempting to stop recording... [Main]\n");
+   // print_timestamp("Attempting to stop recording... [Main]\n");
 
    // Create socket connection using SocketHandler.c related file
    int socket_fd = setup_socket(IP_ADDRESS, PORT);
@@ -209,6 +216,16 @@ int main()
    fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK); // Set non-blocking mode for stdin
 
    print_timestamp("Terminal attributes set succesfully [Main]\n");
+
+   // Initialize Listener Connection
+   char* json_response = NULL;
+   connection_request(&json_response);
+
+   int connection_id = find_connection_id(json_response);
+
+   // Free memory allocated for json_response
+   free(json_response);
+
    fflush(stdout); // Flush the output buffer
 
    // Main loop
@@ -240,6 +257,8 @@ int main()
          // TEST CASE
          if (hour == 13 && minute == 35) 
          {
+            printf("\n");
+            printf("*** Concert: Test ***\n");
             name_handler();
             //log_message(LOG_INFO, "Weekday 5PM-6PM Recording Started", __FILE__, __LINE__);
             // Start recording at 17:00 and record for 60 minutes
@@ -249,6 +268,8 @@ int main()
          // 5:00PM - 6:00PM
          if (hour == 16 && minute == 59) 
          {
+            printf("\n");
+            printf("*** Concert: Weekday 5:00PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekday 5PM-6PM Recording Started", __FILE__, __LINE__);
             // Start recording at 17:00 and record for 60 minutes
@@ -257,6 +278,8 @@ int main()
          // 6:30PM - 7:30PM
          else if (hour == 18 && minute == 29)
          {
+            printf("\n");
+            printf("*** Concert: Weekday 6:30PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekday 6:30PM-7:30PM Recording Started", __FILE__, __LINE__);
             // Start recording at 18:30 and record for 60 minutes
@@ -265,6 +288,8 @@ int main()
          // 8:00PM - 9:30PM
          else if (hour == 19 && minute == 59)
          {
+            printf("\n");
+            printf("*** Concert: Weekday 8:00PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekday 8PM-9:30PM Recording Started", __FILE__, __LINE__);
             // Start recording 20:00 and record for 90 minutes
@@ -282,6 +307,8 @@ int main()
          // 12:30PM - 1:30PM
          if (hour == 12 && minute == 29)
          {
+            printf("\n");
+            printf("*** Concert: Weekend 12:00PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekend 12:30PM-1:30PM Recording Started", __FILE__, __LINE__);
             // Start recording at 12:30 and record for 60 minutes
@@ -290,6 +317,8 @@ int main()
          // 2:00PM - 3:00PM
          else if (hour == 13 && minute == 59)
          {
+            printf("\n");
+            printf("*** Concert: Weekend 2:00PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekend 2:00PM-3:00PM Recording Started", __FILE__, __LINE__);
             // Start recording at 14:00 and record for 60 minutes
@@ -298,6 +327,8 @@ int main()
          // 3:30PM - 4:30PM 
          else if (hour == 15 && minute == 29)
          {
+            printf("\n");
+            printf("*** Concert: Weekend 3:30PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekend 3:30PM-4:30PM Recording Started", __FILE__, __LINE__);
             // Start recording at 15:30 and record for 60 minutes
@@ -306,6 +337,8 @@ int main()
          // 5:00PM - 6:00PM           
          if (hour == 16 && minute == 59) 
          {
+            printf("\n");
+            printf("*** Concert: Weekend 5:00PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekend 5:00PM-6:00PM Recording Started", __FILE__, __LINE__);
             // Start recording at 17:00 and record for 60 minutes
@@ -314,6 +347,8 @@ int main()
          // 6:30PM - 7:30PM
          else if (hour == 18 && minute == 29)
          {
+            printf("\n");
+            printf("*** Concert: Weekend 6:30PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekend 6:30PM-7:30PM Recording Started", __FILE__, __LINE__);
             // Start recording at 18:30 and record for 60 minutes
@@ -322,6 +357,8 @@ int main()
          // 8:00PM - 9:30PM
          else if (hour == 19 && minute == 59)
          {
+            printf("\n");
+            printf("*** Concert: Weekend 8:00PM\n");
             name_handler();
             //log_message(LOG_INFO, "Weekend 8:00PM-9:30PM Recording Started", __FILE__, __LINE__);
             // Start recording 20:00 and record for 90 minutes
