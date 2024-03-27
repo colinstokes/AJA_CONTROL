@@ -22,12 +22,10 @@
 Version Notes
 *****************
 
-6 March, 2024
-Revisited this code because of a problem with some drives not recording all concerts.
-(Unresolved)
+27 March 2024
 
-Added:
-test_case function to replace the Test Case call in the main loop.
+Major update. Incorporated changes from test version, changed halls to reflect new routing with MEIT 
+Lab West now being recorded. Fixed minor formatting issues.
 
 *****************
 End Notes

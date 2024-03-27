@@ -78,7 +78,7 @@ void print_init_message()
    printf("                 Colin Stokes                   \n");
    printf("\n");
    printf(" AJA Controller started on %s  ", timestamp);
-   printf("\n");
+   printf("\n\n");
    printf("************************************************\n");
    printf("************************************************\n");
    printf("\n");

@@ -37,7 +37,7 @@ int rename_clip(int hall_name) //Expects int input 1-4, 1=VH, 2=RH, 3=MEIT, 4=LW
    if (hall_name_str[hall_name] != NULL)
    {
       // printf("%s", hall_name_str[hall_name]);
-      print_timestamp_hall("Attempting to rename clip %d (%s) [FileManagement]\n", hall_name, hall_name_str);
+      //print_timestamp_hall("Attempting to rename clip %d (%s) [FileManagement]\n", hall_name, hall_name_str);
    } 
    else
    {
